@@ -2,11 +2,14 @@ from django.db import models
 
 
 class Competition(models.Model):
-    competition_date = models.DateField()
-    competition_type = models.CharField(max_length=13)
+    date = models.DateField()
+    type = models.CharField(max_length=13)
+    city = models.CharField(default='N/A', max_length=30)
+    country_code = models.CharField(default='N/A', max_length=30)
 
     def __str__(self):
-        return "_".join(self.competition_type, self.competition_date)
+        return "_".join([self.type, self.country_code, self.city,\
+                          self.date.__str__().split()[0]])
 
 class PowerLifter(models.Model):
     competition = models.ForeignKey(Competition)
@@ -32,7 +35,7 @@ class PowerLifter(models.Model):
     deadlift3 = models.FloatField(default=0)
 
     def __str__(self):
-        return " ".join(self.name, self.sur_name)
+        return " ".join([self.name, self.sur_name])
 
 class WeightLifter(models.Model):
     competition = models.ForeignKey(Competition)
@@ -52,4 +55,4 @@ class WeightLifter(models.Model):
     clean3 = models.FloatField(default=0)
 
     def __str__(self):
-        return " ".join(self.name, self.sur_name)
+        return " ".join([self.name, self.sur_name])
