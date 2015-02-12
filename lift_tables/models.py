@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Competition(models.Model):
     date = models.DateField()
     type = models.CharField(max_length=13)
@@ -11,11 +10,17 @@ class Competition(models.Model):
         return "_".join([self.type, self.country_code, self.city,\
                           self.date.__str__().split()[0]])
 
-class PowerLifter(models.Model):
-    competition = models.ForeignKey(Competition)
+class Lifter(models.Model):
     name = models.CharField(max_length=20)
     sur_name = models.CharField(max_length=20)
     birthday = models.DateField()
+
+    def __str__(self):
+        return " ".join([self.name, self.sur_name])
+
+class LifterMeta(models.Model):
+    competition = models.ForeignKey(Competition)
+    lifter =  models.ForeignKey(Lifter)
     weight = models.FloatField(default=0)
     weight_unit = models.CharField(max_length=3)
     height = models.FloatField(default=0)
@@ -24,35 +29,42 @@ class PowerLifter(models.Model):
     squat_rack_height = models.IntegerField(default=0)
     bench_rack_height = models.IntegerField(default=0)
     bench_safety_height = models.IntegerField(default=0)
-    squat1 = models.FloatField(default=0)
-    squat2 = models.FloatField(default=0)
-    squat3 = models.FloatField(default=0)
-    bench1 = models.FloatField(default=0)
-    bench2 = models.FloatField(default=0)
-    bench3 = models.FloatField(default=0)
-    deadlift1 = models.FloatField(default=0)
-    deadlift2 = models.FloatField(default=0)
-    deadlift3 = models.FloatField(default=0)
+    lift1_attempt1 = models.FloatField(default=0)
+    lift1_attempt1_left_judge = models.NullBooleanField(null=True)
+    lift1_attempt1_center_judge = models.NullBooleanField(null=True)
+    lift1_attempt1_right_judge = models.NullBooleanField(null=True)
+    lift1_attempt2 = models.FloatField(default=0)
+    lift1_attempt2_left_judge = models.NullBooleanField(null=True)
+    lift1_attempt2_center_judge = models.NullBooleanField(null=True)
+    lift1_attempt2_right_judge = models.NullBooleanField(null=True)
+    lift1_attempt3 = models.FloatField(default=0)
+    lift1_attempt3_left_judge = models.NullBooleanField(null=True)
+    lift1_attempt3_center_judge = models.NullBooleanField(null=True)
+    lift1_attempt3_right_judge = models.NullBooleanField(null=True)
+    lift2_attempt1 = models.FloatField(default=0)
+    lift2_attempt1_left_judge = models.NullBooleanField(null=True)
+    lift2_attempt1_center_judge = models.NullBooleanField(null=True)
+    lift2_attempt1_right_judge = models.NullBooleanField(null=True)
+    lift2_attempt2 = models.FloatField(default=0)
+    lift2_attempt2_left_judge = models.NullBooleanField(null=True)
+    lift2_attempt2_center_judge = models.NullBooleanField(null=True)
+    lift2_attempt2_right_judge = models.NullBooleanField(null=True)
+    lift2_attempt3 = models.FloatField(default=0)
+    lift2_attempt3_left_judge = models.NullBooleanField(null=True)
+    lift2_attempt3_center_judge = models.NullBooleanField(null=True)
+    lift2_attempt3_right_judge = models.NullBooleanField(null=True)
+    lift3_attempt1 = models.FloatField(default=0)
+    lift3_attempt1_left_judge = models.NullBooleanField(null=True)
+    lift3_attempt1_center_judge = models.NullBooleanField(null=True)
+    lift3_attempt1_right_judge = models.NullBooleanField(null=True)
+    lift3_attempt2 = models.FloatField(default=0)
+    lift3_attempt2_left_judge = models.NullBooleanField(null=True)
+    lift3_attempt2_center_judge = models.NullBooleanField(null=True)
+    lift3_attempt2_right_judge = models.NullBooleanField(null=True)
+    lift3_attempt3 = models.FloatField(default=0)
+    lift3_attempt3_left_judge = models.NullBooleanField(null=True)
+    lift3_attempt3_center_judge = models.NullBooleanField(null=True)
+    lift3_attempt3_right_judge = models.NullBooleanField(null=True)
 
     def __str__(self):
-        return " ".join([self.name, self.sur_name])
-
-class WeightLifter(models.Model):
-    competition = models.ForeignKey(Competition)
-    name = models.CharField(max_length=20)
-    sur_name = models.CharField(max_length=20)
-    birthday = models.DateField()
-    weight = models.FloatField(default=0)
-    weight_unit = models.CharField(max_length=3)
-    height = models.FloatField(default=0)
-    height_unit = models.CharField(max_length=3)
-    club = models.CharField(max_length=30)
-    snatch1 = models.FloatField(default=0)
-    snatch2 = models.FloatField(default=0)
-    snatch3 = models.FloatField(default=0)
-    clean1 = models.FloatField(default=0)
-    clean2 = models.FloatField(default=0)
-    clean3 = models.FloatField(default=0)
-
-    def __str__(self):
-        return " ".join([self.name, self.sur_name])
+        return " ".join([self.lifter.__str__(), self.competition.__str__()])
