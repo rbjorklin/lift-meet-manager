@@ -7,8 +7,8 @@ class Competition(models.Model):
     country_code = models.CharField(default='N/A', max_length=30)
 
     def __str__(self):
-        return "_".join([self.type, self.country_code, self.city,\
-                          self.date.__str__().split()[0]])
+        return "_".join([self.type, self.country_code, self.city])
+                          
 
 class Lifter(models.Model):
     name = models.CharField(max_length=20)
@@ -19,6 +19,12 @@ class Lifter(models.Model):
         return " ".join([self.name, self.sur_name])
 
 class LifterMeta(models.Model):
+    def date(self):
+        return self.competition.date.__str__()
+
+    def lifter_name(self):
+        return " ".join([self.lifter.name, self.lifter.sur_name])
+
     competition = models.ForeignKey(Competition)
     lifter =  models.ForeignKey(Lifter)
     weight = models.FloatField(default=0)
