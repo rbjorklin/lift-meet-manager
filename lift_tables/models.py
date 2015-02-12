@@ -8,6 +8,7 @@ class Competition(models.Model):
 
     def __str__(self):
         return self.competition_type
+
 class PowerLifter(models.Model):
     competition = models.ForeignKey(Competition)
     name = models.CharField(max_length=20)
@@ -34,7 +35,7 @@ class PowerLifter(models.Model):
     def __str__(self):
         return " ".join(self.name, self.sur_name)
 
-class Weight_lifter(models.Model):
+class WeightLifter(models.Model):
     competition = models.ForeignKey(Competition)
     name = models.CharField(max_length=20)
     sur_name = models.CharField(max_length=20)
