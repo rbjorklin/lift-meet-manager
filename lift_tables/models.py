@@ -3,11 +3,10 @@ from django.db import models
 
 class Competition(models.Model):
     competition_date = models.DateField()
-    competition_type = models.CharField(max_length=6)
-    #lifters = models.CommaSeparatedIntegerField(max_length=50)
+    competition_type = models.CharField(max_length=13)
 
     def __str__(self):
-        return self.competition_type
+        return "_".join(self.competition_type, self.competition_date)
 
 class PowerLifter(models.Model):
     competition = models.ForeignKey(Competition)
