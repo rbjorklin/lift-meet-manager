@@ -1,37 +1,24 @@
 from django.db import models
-
-class Competition(models.Model):
-    date = models.DateField()
-    type = models.CharField(max_length=13)
-    city = models.CharField(default='N/A', max_length=30)
-    country_code = models.CharField(default='N/A', max_length=30)
-
-    def __str__(self):
-        return "_".join([self.type, self.country_code, self.city])
                           
-
 class Lifter(models.Model):
+    def __str__(self):
+        return " ".join([self.name, self.sur_name, self.date.__str__()])
+
+    #def date(self):
+    #    return self.competition.date.__str__()
+
+    #def lifter_name(self):
+    #    return " ".join([self.lifter.name, self.lifter.sur_name])
+
     name = models.CharField(max_length=20)
     sur_name = models.CharField(max_length=20)
     birthday = models.DateField()
-
-    def __str__(self):
-        return " ".join([self.name, self.sur_name])
-
-class LifterMeta(models.Model):
-    def date(self):
-        return self.competition.date.__str__()
-
-    def lifter_name(self):
-        return " ".join([self.lifter.name, self.lifter.sur_name])
-
-    competition = models.ForeignKey(Competition)
-    lifter =  models.ForeignKey(Lifter)
+    date = models.DateField()
     weight = models.FloatField(default=0)
-    weight_unit = models.CharField(max_length=3)
+    weight_unit = models.CharField(default='kg', max_length=3)
     height = models.FloatField(default=0)
-    height_unit = models.CharField(max_length=3)
-    club = models.CharField(max_length=30)
+    height_unit = models.CharField(default='cm', max_length=3)
+    club = models.CharField(max_length=30, blank=True)
     squat_rack_height = models.IntegerField(default=0)
     bench_rack_height = models.IntegerField(default=0)
     bench_safety_height = models.IntegerField(default=0)
@@ -72,5 +59,10 @@ class LifterMeta(models.Model):
     lift3_attempt3_center_judge = models.NullBooleanField(null=True)
     lift3_attempt3_right_judge = models.NullBooleanField(null=True)
 
+class Competition(models.Model):
+    participants = models.ManyToManyField(Lifter, blank=True)
+    type = models.CharField(max_length=20)
+    city = models.CharField(default='N/A', max_length=30)
+
     def __str__(self):
-        return " ".join([self.lifter.__str__(), self.competition.__str__()])
+        return "_".join([self.type, self.city])

@@ -1,17 +1,17 @@
 from django.contrib import admin
-from lift_tables.models import Competition, Lifter, LifterMeta
+from lift_tables.models import Competition, Lifter
 
 # Register your models here.
 
-class LifterMetaAdmin(admin.ModelAdmin):
-    list_display = ( 'date', 'lifter_name', 'competition' )
+#class LifterMetaAdmin(admin.ModelAdmin):
+#    list_display = ( 'date', 'lifter_name', 'competition' )
+#
+#class LifterAdmin(admin.ModelAdmin):
+#    list_display = ( 'name', 'sur_name', 'birthday' )
+#
+#class CompetitionAdmin(admin.ModelAdmin):
+#    list_display = ( 'date', 'type', 'city' )
 
-class LifterAdmin(admin.ModelAdmin):
-    list_display = ( 'name', 'sur_name', 'birthday' )
-
-class CompetitionAdmin(admin.ModelAdmin):
-    list_display = ( 'date', 'type', 'city', 'country_code' )
-
-admin.site.register(Competition, CompetitionAdmin)
-admin.site.register(Lifter, LifterAdmin)
-admin.site.register(LifterMeta, LifterMetaAdmin)
+admin.site.register(Competition)
+admin.site.register(Lifter)
+#admin.site.register(LifterMeta)
