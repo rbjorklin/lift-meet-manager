@@ -7,6 +7,7 @@
 .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
 .tg .tg-8o5d{background-color:#34ff34}
 </style>
+{% if competition %}
 <table class="tg">
   <tr>
     <th class="tg-031e">Placering</th>
@@ -14,46 +15,35 @@
     <th class="tg-031e">Klass</th>
     <th class="tg-031e">Förnamn</th>
     <th class="tg-031e">Efternamn</th>
+    <th class="tg-031e">Klubb</th>
     <th class="tg-031e" colspan="3">Knäböj</th>
     <th class="tg-031e" colspan="3">Bänkpress</th>
     <th class="tg-031e" colspan="3">Marklyft</th>
     <th class="tg-031e">Totalt</th>
     <th class="tg-031e">Grupp</th>
   </tr>
+    {% for lifter in competition.participants.all %}
   <tr>
     <td class="tg-031e">1</td>
-    <td class="tg-031e">98</td>
+    <td class="tg-031e">{{ lifter.weight }}</td>
     <td class="tg-031e">105</td>
-    <td class="tg-031e">Christoffer</td>
-    <td class="tg-031e">Hultqvist</td>
-    <td class="tg-8o5d">230</td>
-    <td class="tg-8o5d">235</td>
-    <td class="tg-8o5d">240</td>
-    <td class="tg-8o5d">160</td>
-    <td class="tg-8o5d">170<br></td>
-    <td class="tg-8o5d">180</td>
-    <td class="tg-8o5d">270</td>
-    <td class="tg-8o5d">290</td>
-    <td class="tg-8o5d">295</td>
+    <td class="tg-031e">{{ lifter.name }}</td>
+    <td class="tg-031e">{{ lifter.sur_name }}</td>
+    <td class="tg-031e">{{ lifter.club }}</td>
+    <td class="tg-8o5d">{{ lifter.lift1_attempt1 }}</td>
+    <td class="tg-8o5d">{{ lifter.lift1_attempt2 }}</td>
+    <td class="tg-8o5d">{{ lifter.lift1_attempt3 }}</td>
+    <td class="tg-8o5d">{{ lifter.lift2_attempt1 }}</td>
+    <td class="tg-8o5d">{{ lifter.lift2_attempt2 }}<br></td>
+    <td class="tg-8o5d">{{ lifter.lift2_attempt3 }}</td>
+    <td class="tg-8o5d">{{ lifter.lift3_attempt1 }}</td>
+    <td class="tg-8o5d">{{ lifter.lift3_attempt2 }}</td>
+    <td class="tg-8o5d">{{ lifter.lift3_attempt3 }}</td>
     <td class="tg-031e">715</td>
     <td class="tg-031e">1</td>
   </tr>
-  <tr>
-    <td class="tg-031e">2</td>
-    <td class="tg-031e">79</td>
-    <td class="tg-031e">83</td>
-    <td class="tg-031e">Robin</td>
-    <td class="tg-031e">Björklin</td>
-    <td class="tg-8o5d">150</td>
-    <td class="tg-8o5d">160</td>
-    <td class="tg-8o5d">170</td>
-    <td class="tg-8o5d">120</td>
-    <td class="tg-8o5d">130</td>
-    <td class="tg-8o5d">140</td>
-    <td class="tg-8o5d">220</td>
-    <td class="tg-8o5d">230</td>
-    <td class="tg-8o5d">240</td>
-    <td class="tg-031e">550</td>
-    <td class="tg-031e">1</td>
-  </tr>
+    {% endfor %}
 </table>
+{% else %}
+    <p>No competitions are available.</p>
+{% endif %}

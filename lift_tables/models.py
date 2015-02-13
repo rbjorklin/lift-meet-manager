@@ -2,18 +2,24 @@ from django.db import models
                           
 class Lifter(models.Model):
     def __str__(self):
-        return " ".join([self.name, self.sur_name, self.date.__str__()])
-
-    #def date(self):
-    #    return self.competition.date.__str__()
-
-    #def lifter_name(self):
-    #    return " ".join([self.lifter.name, self.lifter.sur_name])
+        return " ".join([self.name, self.sur_name])
 
     name = models.CharField(max_length=20)
     sur_name = models.CharField(max_length=20)
+    license_no = models.CharField(max_length=20, blank=True)
     birthday = models.DateField()
+
+class Competition(models.Model):
+    type = models.CharField(max_length=20)
+    city = models.CharField(max_length=30, blank=True)
     date = models.DateField()
+
+    def __str__(self):
+        return "_".join([self.type, self.city, self.date.__str__()])
+
+class Result(models.Model):
+    competition = models.ForeignKey(Competition)
+    lifter = models.ForeignKey(Lifter)
     weight = models.FloatField(default=0)
     weight_unit = models.CharField(default='kg', max_length=3)
     height = models.FloatField(default=0)
@@ -58,11 +64,3 @@ class Lifter(models.Model):
     lift3_attempt3_left_judge = models.NullBooleanField(null=True)
     lift3_attempt3_center_judge = models.NullBooleanField(null=True)
     lift3_attempt3_right_judge = models.NullBooleanField(null=True)
-
-class Competition(models.Model):
-    participants = models.ManyToManyField(Lifter, blank=True)
-    type = models.CharField(max_length=20)
-    city = models.CharField(default='N/A', max_length=30)
-
-    def __str__(self):
-        return "_".join([self.type, self.city])

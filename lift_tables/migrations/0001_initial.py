@@ -13,9 +13,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Competition',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
                 ('type', models.CharField(max_length=20)),
-                ('city', models.CharField(max_length=30, default='N/A')),
+                ('city', models.CharField(blank=True, max_length=30)),
+                ('date', models.DateField()),
             ],
             options={
             },
@@ -24,15 +25,24 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Lifter',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
                 ('name', models.CharField(max_length=20)),
                 ('sur_name', models.CharField(max_length=20)),
+                ('license_no', models.CharField(blank=True, max_length=20)),
                 ('birthday', models.DateField()),
-                ('date', models.DateField()),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Result',
+            fields=[
+                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
                 ('weight', models.FloatField(default=0)),
-                ('weight_unit', models.CharField(max_length=3, default='kg')),
+                ('weight_unit', models.CharField(default='kg', max_length=3)),
                 ('height', models.FloatField(default=0)),
-                ('height_unit', models.CharField(max_length=3, default='cm')),
+                ('height_unit', models.CharField(default='cm', max_length=3)),
                 ('club', models.CharField(blank=True, max_length=30)),
                 ('squat_rack_height', models.IntegerField(default=0)),
                 ('bench_rack_height', models.IntegerField(default=0)),
@@ -73,15 +83,11 @@ class Migration(migrations.Migration):
                 ('lift3_attempt3_left_judge', models.NullBooleanField()),
                 ('lift3_attempt3_center_judge', models.NullBooleanField()),
                 ('lift3_attempt3_right_judge', models.NullBooleanField()),
+                ('competition', models.ForeignKey(to='lift_tables.Competition')),
+                ('lifter', models.ForeignKey(to='lift_tables.Lifter')),
             ],
             options={
             },
             bases=(models.Model,),
-        ),
-        migrations.AddField(
-            model_name='competition',
-            name='participants',
-            field=models.ManyToManyField(blank=True, to='lift_tables.Lifter'),
-            preserve_default=True,
         ),
     ]
