@@ -1,0 +1,57 @@
+<head>
+<meta charset="UTF-8" http-equiv="refresh" content="5" >
+</head> 
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-8o5d{background-color:#34ff34}
+.tg .tg-5fb6{background-color:#fe0000}
+</style>
+{% if result_set %}
+<table class="tg">
+  <tr>
+    <th class="tg-031e">Placering</th>
+    <th class="tg-031e">Vikt</th>
+    <th class="tg-031e">Klass</th>
+    <th class="tg-031e">Förnamn</th>
+    <th class="tg-031e">Efternamn</th>
+    <th class="tg-031e">Klubb</th>
+    <th class="tg-031e" colspan="3">Knäböj</th>
+    <th class="tg-031e" colspan="3">Bänkpress</th>
+    <th class="tg-031e" colspan="3">Marklyft</th>
+    <th class="tg-031e">Totalt</th>
+    <th class="tg-031e">Grupp</th>
+  </tr>
+    {% for result in result_set.all %}
+  <tr>
+    <td class="tg-031e">1</td>
+    <td class="tg-031e">{{ result.weight }}</td>
+    <td class="tg-031e">105</td>
+    <td class="tg-031e">{{ result.lifter.name }}</td>
+    <td class="tg-031e">{{ result.lifter.sur_name }}</td>
+    <td class="tg-031e">{{ result.club }}</td>
+    {% if result.squat1_left_judge == None or result.squat1_center_judge == None or result.squat1_right_judge == None %}
+    <td class="tg-031e">{{ result.squat1 }}</td>
+    {% elif result.squat1_left_judge == True %}
+    <td class="tg-8o5d">{{ result.squat1 }}</td>
+    {% else %}
+    <td class="tg-5fb6">{{ result.squat1 }}</td>
+    {% endif %}
+    <td class="tg-8o5d">{{ result.squat1 }}</td>
+    <td class="tg-8o5d">{{ result.squat2 }}</td>
+    <td class="tg-8o5d">{{ result.squat3 }}</td>
+    <td class="tg-8o5d">{{ result.bench1 }}</td>
+    <td class="tg-8o5d">{{ result.bench2 }}<br></td>
+    <td class="tg-8o5d">{{ result.bench3 }}</td>
+    <td class="tg-8o5d">{{ result.deadlift1 }}</td>
+    <td class="tg-8o5d">{{ result.deadlift2 }}</td>
+    <td class="tg-8o5d">{{ result.deadlift3 }}</td>
+    <td class="tg-031e">715</td>
+    <td class="tg-031e">1</td>
+  </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>No competitions are available.</p>
+{% endif %}

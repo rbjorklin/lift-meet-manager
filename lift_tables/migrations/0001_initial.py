@@ -1,0 +1,117 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='Competition',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('type', models.CharField(max_length=20)),
+                ('city', models.CharField(max_length=30, blank=True)),
+                ('date', models.DateField()),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Lifter',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('name', models.CharField(max_length=20)),
+                ('sur_name', models.CharField(max_length=20)),
+                ('license_no', models.CharField(max_length=20, blank=True)),
+                ('birthday', models.DateField()),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Result',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('weight', models.FloatField(default=0)),
+                ('weight_unit', models.CharField(default='kg', max_length=3)),
+                ('height', models.FloatField(default=0)),
+                ('height_unit', models.CharField(default='cm', max_length=3)),
+                ('club', models.CharField(max_length=30, blank=True)),
+                ('squat_rack_height', models.IntegerField(default=0)),
+                ('bench_rack_height', models.IntegerField(default=0)),
+                ('bench_safety_height', models.IntegerField(default=0)),
+                ('squat1', models.FloatField(default=0)),
+                ('squat1_left_judge', models.NullBooleanField()),
+                ('squat1_center_judge', models.NullBooleanField()),
+                ('squat1_right_judge', models.NullBooleanField()),
+                ('squat2', models.FloatField(default=0)),
+                ('squat2_left_judge', models.NullBooleanField()),
+                ('squat2_center_judge', models.NullBooleanField()),
+                ('squat2_right_judge', models.NullBooleanField()),
+                ('squat3', models.FloatField(default=0)),
+                ('squat3_left_judge', models.NullBooleanField()),
+                ('squat3_center_judge', models.NullBooleanField()),
+                ('squat3_right_judge', models.NullBooleanField()),
+                ('bench1', models.FloatField(default=0)),
+                ('bench1_left_judge', models.NullBooleanField()),
+                ('bench1_center_judge', models.NullBooleanField()),
+                ('bench1_right_judge', models.NullBooleanField()),
+                ('bench2', models.FloatField(default=0)),
+                ('bench2_left_judge', models.NullBooleanField()),
+                ('bench2_center_judge', models.NullBooleanField()),
+                ('bench2_right_judge', models.NullBooleanField()),
+                ('bench3', models.FloatField(default=0)),
+                ('bench3_left_judge', models.NullBooleanField()),
+                ('bench3_center_judge', models.NullBooleanField()),
+                ('bench3_right_judge', models.NullBooleanField()),
+                ('deadlift1', models.FloatField(default=0)),
+                ('deadlift1_left_judge', models.NullBooleanField()),
+                ('deadlift1_center_judge', models.NullBooleanField()),
+                ('deadlift1_right_judge', models.NullBooleanField()),
+                ('deadlift2', models.FloatField(default=0)),
+                ('deadlift2_left_judge', models.NullBooleanField()),
+                ('deadlift2_center_judge', models.NullBooleanField()),
+                ('deadlift2_right_judge', models.NullBooleanField()),
+                ('deadlift3', models.FloatField(default=0)),
+                ('deadlift3_left_judge', models.NullBooleanField()),
+                ('deadlift3_center_judge', models.NullBooleanField()),
+                ('deadlift3_right_judge', models.NullBooleanField()),
+                ('snatch1', models.FloatField(default=0)),
+                ('snatch1_left_judge', models.NullBooleanField()),
+                ('snatch1_center_judge', models.NullBooleanField()),
+                ('snatch1_right_judge', models.NullBooleanField()),
+                ('snatch2', models.FloatField(default=0)),
+                ('snatch2_left_judge', models.NullBooleanField()),
+                ('snatch2_center_judge', models.NullBooleanField()),
+                ('snatch2_right_judge', models.NullBooleanField()),
+                ('snatch3', models.FloatField(default=0)),
+                ('snatch3_left_judge', models.NullBooleanField()),
+                ('snatch3_center_judge', models.NullBooleanField()),
+                ('snatch3_right_judge', models.NullBooleanField()),
+                ('clean1', models.FloatField(default=0)),
+                ('clean1_left_judge', models.NullBooleanField()),
+                ('clean1_center_judge', models.NullBooleanField()),
+                ('clean1_right_judge', models.NullBooleanField()),
+                ('clean2', models.FloatField(default=0)),
+                ('clean2_left_judge', models.NullBooleanField()),
+                ('clean2_center_judge', models.NullBooleanField()),
+                ('clean2_right_judge', models.NullBooleanField()),
+                ('clean3', models.FloatField(default=0)),
+                ('clean3_left_judge', models.NullBooleanField()),
+                ('clean3_center_judge', models.NullBooleanField()),
+                ('clean3_right_judge', models.NullBooleanField()),
+                ('competition', models.ForeignKey(to='lift_tables.Competition')),
+                ('lifter', models.ForeignKey(to='lift_tables.Lifter')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+    ]
